@@ -15,22 +15,7 @@ function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hola");
-    /* Send a request to the server for authentication */
-    // axios
-    //   .post("https://myflapix.herokuapp.com/login", {
-    //     Username: username,
-    //     Password: password,
-    //   })
-    //   .then((response) => {
-    //     const data = response.data;
-    //     props.onLoggedIn(data);
-    //     window.open("/", "_self");
-    //   })
-    //   .catch((e) => {
-    //     console.log("no such user");
-    //     alert("Username or Password incorrect");
-    //   });
+    console.log("hi");
   };
 
   console.log("log in view just rendered");
