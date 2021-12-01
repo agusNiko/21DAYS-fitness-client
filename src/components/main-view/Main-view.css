@@ -1,0 +1,18 @@
+h1 {
+  font-size: 20px;
+  color: #000;
+}
+
+h2 {
+  font-size: 20px;
+  color: #000;
+}
+
+.main-view {
+  height: 650px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

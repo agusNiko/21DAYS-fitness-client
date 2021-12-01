@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 
 function RegistrationView(props) {
-  const [inputValue, setInputValue] = useState([]);
-  const [tomate, setTomate] = useState();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [inputValues, setInputValue] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,18 +10,12 @@ function RegistrationView(props) {
   function handleChange(event) {
     let inputName = event.target.name;
     let value = event.target.value;
-    let tomatin = { [inputName]: value };
-
-    setInputValue((prevItems) => {
-      return [...prevItems, { [inputName]: value }];
-    });
-
-    setTomate({ ...tomate, [inputName]: value });
+    setInputValue({ ...inputValues, [inputName]: value });
   }
 
   return (
     <div>
-      <button onClick={() => console.log(tomate)}>tomate</button>
+      <button onClick={() => console.log(inputValues)}>tomate</button>
       <div className="sign-up-form">
         <form id="registrationForm" action="/" method="POST">
           <div className="form-control">
