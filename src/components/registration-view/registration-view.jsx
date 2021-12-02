@@ -1,33 +1,110 @@
 import React, { useState } from "react";
 
 function RegistrationView(props) {
-  const [inputValues, setInputValue] = useState({});
+  const [inputValues, setInputValue] = useState({
+    fName: "",
+    lName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [validation, setValidation] = useState({
+    fName: "",
+    lName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  //handle submit updates
+  function handleChange(event) {
+    const { name, value } = event.target; //or:  let value = event.target.value; // let name = event.target.name;
+    setInputValue({ ...inputValues, [name]: value });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
+    let errors = validation;
 
-  function handleChange(event) {
-    let inputName = event.target.name;
-    let value = event.target.value;
-    setInputValue({ ...inputValues, [inputName]: value });
-  }
+    //first Name validation
+    if (!inputValues.fName.trim()) {
+      errors.fName = "First name is required";
+    } else {
+      errors.fName = "";
+    }
+    //last Name validation
+    if (!inputValues.lName.trim()) {
+      errors.lName = "Last name is required";
+    } else {
+      errors.lName = "";
+    }
+
+    // email validation
+    const emailCond =
+      "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
+    if (!inputValues.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!inputValues.email.match(emailCond)) {
+      errors.email = "Please ingress a valid email address";
+    } else {
+      errors.email = "";
+    }
+
+    //password validation
+    const cond1 = "/^(?=.*[a-z]).{6,20}$/";
+    const cond2 = "/^(?=.*[A-Z]).{6,20}$/";
+    const cond3 = "/^(?=.*[0-9]).{6,20}$/";
+    const password = inputValues.password;
+    if (!password) {
+      errors.password = "password is required";
+    } else if (password.length < 6) {
+      errors.password = "Password must be longer than 6 characters";
+    } else if (password.length >= 20) {
+      errors.password = "Password must shorter than 20 characters";
+    } else if (!password.match(cond1)) {
+      errors.password = "Password must contain at least one lowercase";
+    } else if (!password.match(cond2)) {
+      errors.password = "Password must contain at least one capital letter";
+    } else if (!password.match(cond3)) {
+      errors.password = "Password must contain at least a number";
+    } else {
+      errors.password = "";
+    }
+
+    //matchPassword validation
+    if (!inputValues.confirmPassword) {
+      errors.confirmPassword = "Password confirmation is required";
+    } else if (inputValues.confirmPassword !== inputValues.Password) {
+      errors.confirmPassword = "Password does not match confirmation password";
+    } else {
+      errors.password = "";
+    }
+
+    setValidation(errors);
+    return console.log(validation);
+  };
 
   return (
     <div>
-      <button onClick={() => console.log(inputValues)}>tomate</button>
+      <button onClick={() => console.log(inputValues)}>back</button>
       <div className="sign-up-form">
-        <form id="registrationForm" action="/" method="POST">
+        <form
+          id="registrationForm"
+          action="/"
+          method="POST"
+          onSubmit={handleSubmit}
+        >
           <div className="form-control">
             <input
               placeholder="First Name"
               type="string"
               name="fName"
               id="fName"
-              className="inputField"
-              required
+              className="input-field"
               onChange={(e) => handleChange(e)}
+              value={inputValues.fName}
             />
+            {validation.fName && console.log(validation.fName)}
           </div>
           <div className="form-control">
             <input
@@ -35,9 +112,9 @@ function RegistrationView(props) {
               type="string"
               id="lName"
               name="lName"
-              className="inputField"
+              className="input-field"
               onChange={(e) => handleChange(e)}
-              required
+              value={inputValues.lName}
             />
           </div>
           <div className="form-control">
@@ -45,9 +122,9 @@ function RegistrationView(props) {
               placeholder="email"
               type="email"
               name="email"
-              className="inputField"
+              className="input-field"
               onChange={(e) => handleChange(e)}
-              required
+              value={inputValues.email}
             />
           </div>
           <div className="form-control">
@@ -55,8 +132,9 @@ function RegistrationView(props) {
               placeholder="password"
               type="password"
               name="password"
-              className="inputField"
+              className="input-field"
               onChange={(e) => handleChange(e)}
+              value={inputValues.password}
               required
             />
             <span
@@ -71,10 +149,10 @@ function RegistrationView(props) {
             <input
               placeholder="confirm password"
               type="password"
-              name="confirmpassword"
-              className="inputField"
-              required
+              name="confirmPassword"
+              className="input-field"
               onChange={(e) => handleChange(e)}
+              value={inputValues.confirmPassword}
             />
             <span
               name="matchPassword"
