@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function RegistrationView(props) {
+function RegistrationView() {
   const [inputValues, setInputValue] = useState({
     fName: "",
     lName: "",
@@ -8,6 +8,7 @@ function RegistrationView(props) {
     password: "",
     confirmPassword: "",
   });
+
   const [validation, setValidation] = useState({
     fName: "",
     lName: "",
@@ -24,7 +25,7 @@ function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let errors = validation;
+    let errors = { ...validation };
 
     //first Name validation
     if (!inputValues.fName.trim()) {
@@ -80,13 +81,18 @@ function RegistrationView(props) {
       errors.password = "";
     }
 
-    setValidation(errors);
-    return console.log(validation);
+    return setValidation(errors);
   };
 
   return (
     <div>
+      <p>
+        {"hola"}
+        {inputValues.fName}
+        {validation.fName}
+      </p>
       <button onClick={() => console.log(inputValues)}>back</button>
+      <button onClick={() => console.log(validation)}>back</button>
       <div className="sign-up-form">
         <form
           id="registrationForm"
@@ -104,7 +110,8 @@ function RegistrationView(props) {
               onChange={(e) => handleChange(e)}
               value={inputValues.fName}
             />
-            {validation.fName && console.log(validation.fName)}
+            {validation.fName && <p>{validation.fName}</p>}
+            {validation.fName && console.log(validation)}
           </div>
           <div className="form-control">
             <input
@@ -116,6 +123,7 @@ function RegistrationView(props) {
               onChange={(e) => handleChange(e)}
               value={inputValues.lName}
             />
+            {validation.lName && <p>{validation.lName}</p>}
           </div>
           <div className="form-control">
             <input
@@ -127,6 +135,8 @@ function RegistrationView(props) {
               value={inputValues.email}
             />
           </div>
+          {validation.email && <p>{validation.email}</p>}
+
           <div className="form-control">
             <input
               placeholder="password"
@@ -137,13 +147,7 @@ function RegistrationView(props) {
               value={inputValues.password}
               required
             />
-            <span
-              name="passwordValidation"
-              className="error-message"
-              style={{ color: "red" }}
-            >
-              {" "}
-            </span>
+            {validation.password && <p>{validation.password}</p>}
           </div>
           <div className="form-control">
             <input
@@ -153,18 +157,15 @@ function RegistrationView(props) {
               className="input-field"
               onChange={(e) => handleChange(e)}
               value={inputValues.confirmPassword}
+              required
             />
-            <span
-              name="matchPassword"
-              className="error-message"
-              style={{ color: "red" }}
-            >
-              {" "}
-            </span>
           </div>
           <button type="submit" id="submit-button">
             submit
           </button>
+          <span className="form-input-login">
+            Already have an account? Login <a href="#">here</a>
+          </span>
         </form>
       </div>
     </div>
