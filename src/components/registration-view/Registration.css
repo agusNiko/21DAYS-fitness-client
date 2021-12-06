@@ -38,8 +38,9 @@ p {
   height: 45px;
   margin: 5px;
   background-color: #f9f9f9;
-  border: 2px none rgba(0, 0, 0, 0.616);
+  border: none;
   border-radius: 5px;
+  box-shadow: inset 2px 2px 5px #2c936242;
 }
 .input-field p {
   display: flex;
@@ -62,6 +63,7 @@ select:focus {
   outline: none;
   border: none;
   background-color: rgba(255, 255, 255, 0);
+  box-shadow: none;
 }
 
 .input-icon {
