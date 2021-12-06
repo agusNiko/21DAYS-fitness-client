@@ -33,12 +33,13 @@
 .Case-middle {
   display: flex;
   flex-direction: row;
+  min-height: 800px;
 }
 
 .Scream {
   width: 375px;
-  height: 812px;
   display: flex;
+
   flex-direction: column;
 }
 
