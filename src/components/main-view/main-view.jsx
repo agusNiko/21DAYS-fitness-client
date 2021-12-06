@@ -15,8 +15,6 @@ class MainView extends React.Component {
     return (
       <div className="main-view">
         <RegistrationView />
-        <h1 className="">21DAYS fitness APP!</h1>
-        <h2>--- Comming soon ---</h2>
       </div>
     );
   }
