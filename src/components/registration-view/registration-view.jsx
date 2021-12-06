@@ -4,9 +4,10 @@ import Button from "@mui/material/Button";
 
 import {
   ArrowBackIos,
-  Error,
   ErrorOutlined,
-  FmdBad,
+  LockOutlined,
+  MailOutlineOutlined,
+  PersonOutlined,
 } from "@mui/icons-material";
 
 function RegistrationView() {
@@ -94,8 +95,6 @@ function RegistrationView() {
 
   return (
     <div className="registration-view">
-      <ArrowBackIos />
-      <h1> Register </h1>
       <div className="sign-up-form">
         <form
           id="registrationForm"
@@ -103,8 +102,22 @@ function RegistrationView() {
           method="POST"
           onSubmit={handleSubmit}
         >
+          <div
+            className="back-registration"
+            onClick={() => console.log("hola")}
+          >
+            <ArrowBackIos className="back-icon" />
+            <h1> Register </h1>
+          </div>
+          <div className="back-registration">
+            <p>Let’s create a new account</p>
+          </div>
+
           <div className="form-control">
             <div className="input-field">
+              <p className="input-icon">
+                <PersonOutlined />
+              </p>
               <input
                 placeholder="First Name"
                 type="string"
@@ -114,9 +127,11 @@ function RegistrationView() {
                 onChange={(e) => handleChange(e)}
                 value={inputValues.fName}
               />
-              <p>
-                <ErrorOutlined></ErrorOutlined>
-              </p>
+              {validation.fName && (
+                <p className="register-error_icon">
+                  <ErrorOutlined></ErrorOutlined>
+                </p>
+              )}
             </div>
 
             {validation.fName && (
@@ -125,6 +140,9 @@ function RegistrationView() {
           </div>
           <div className="form-control">
             <div className="input-field">
+              <p className="input-icon">
+                <PersonOutlined />
+              </p>
               <input
                 placeholder="Last Name"
                 type="string"
@@ -134,9 +152,11 @@ function RegistrationView() {
                 onChange={(e) => handleChange(e)}
                 value={inputValues.lName}
               />
-              <p>
-                <ErrorOutlined></ErrorOutlined>
-              </p>
+              {validation.lName && (
+                <p className="register-error_icon">
+                  <ErrorOutlined></ErrorOutlined>
+                </p>
+              )}
             </div>
 
             {validation.lName && (
@@ -145,26 +165,35 @@ function RegistrationView() {
           </div>
           <div className="form-control">
             <div className="input-field">
+              <p className="input-icon">
+                <MailOutlineOutlined />
+              </p>
               <input
-                placeholder="email"
+                placeholder="Email"
                 type="email"
                 name="email"
                 className="input-field"
                 onChange={(e) => handleChange(e)}
                 value={inputValues.email}
               />
-              <p>
-                <ErrorOutlined></ErrorOutlined>
-              </p>
+              {validation.email && (
+                <p className="register-error_icon">
+                  <ErrorOutlined></ErrorOutlined>
+                </p>
+              )}
             </div>
+            {validation.email && (
+              <p className="register-error_msg">{validation.email}</p>
+            )}
           </div>
-          {validation.email && (
-            <p className="register-error_msg">{validation.email}</p>
-          )}
+
           <div className="form-control">
             <div className="input-field">
+              <p className="input-icon">
+                <LockOutlined />
+              </p>
               <input
-                placeholder="password"
+                placeholder="Password"
                 type="password"
                 name="password"
                 className="input-field"
@@ -172,9 +201,11 @@ function RegistrationView() {
                 value={inputValues.password}
                 required
               />
-              <p>
-                <ErrorOutlined></ErrorOutlined>
-              </p>
+              {validation.password && (
+                <p className="register-error_icon">
+                  <ErrorOutlined></ErrorOutlined>
+                </p>
+              )}
             </div>
             {validation.password && (
               <p className="register-error_msg">{validation.password}</p>
@@ -182,8 +213,11 @@ function RegistrationView() {
           </div>
           <div className="form-control">
             <div className="input-field">
+              <p className="input-icon">
+                <LockOutlined />
+              </p>
               <input
-                placeholder="confirm password"
+                placeholder="Confirm password"
                 type="password"
                 name="confirmPassword"
                 className="input-field"
@@ -191,16 +225,18 @@ function RegistrationView() {
                 value={inputValues.confirmPassword}
                 required
               />
-              <p>
-                <ErrorOutlined></ErrorOutlined>
-              </p>
+              {validation.confirmPassword && (
+                <p>
+                  <ErrorOutlined className="register-error_icon"></ErrorOutlined>
+                </p>
+              )}
             </div>
             {validation.confirmPassword && (
               <p className="register-error_msg">{validation.confirmPassword}</p>
             )}
           </div>
           <Button variant="contained" type="submit" id="submit-button">
-            submit
+            Register
           </Button>
         </form>
       </div>
