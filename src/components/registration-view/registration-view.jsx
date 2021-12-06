@@ -1,4 +1,13 @@
 import React, { useState } from "react";
+import "./Registration.css";
+import Button from "@mui/material/Button";
+
+import {
+  ArrowBackIos,
+  Error,
+  ErrorOutlined,
+  FmdBad,
+} from "@mui/icons-material";
 
 function RegistrationView() {
   const [inputValues, setInputValue] = useState({
@@ -41,8 +50,7 @@ function RegistrationView() {
     }
 
     // email validation
-    const emailCond =
-      "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
+    const emailCond = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!inputValues.email.trim()) {
       errors.email = "Email is required";
     } else if (!inputValues.email.match(emailCond)) {
@@ -52,9 +60,9 @@ function RegistrationView() {
     }
 
     //password validation
-    const cond1 = "/^(?=.*[a-z]).{6,20}$/";
-    const cond2 = "/^(?=.*[A-Z]).{6,20}$/";
-    const cond3 = "/^(?=.*[0-9]).{6,20}$/";
+    const cond1 = /^(?=.*[a-z]).{6,20}$/;
+    const cond2 = /^(?=.*[A-Z]).{6,20}$/;
+    const cond3 = /^(?=.*[0-9]).{6,20}$/;
     const password = inputValues.password;
     if (!password) {
       errors.password = "password is required";
@@ -75,24 +83,19 @@ function RegistrationView() {
     //matchPassword validation
     if (!inputValues.confirmPassword) {
       errors.confirmPassword = "Password confirmation is required";
-    } else if (inputValues.confirmPassword !== inputValues.Password) {
-      errors.confirmPassword = "Password does not match confirmation password";
+    } else if (inputValues.confirmPassword !== inputValues.password) {
+      errors.confirmPassword = "Passwords do not match";
     } else {
-      errors.password = "";
+      errors.confirmPassword = "";
     }
 
     return setValidation(errors);
   };
 
   return (
-    <div>
-      <p>
-        {"hola"}
-        {inputValues.fName}
-        {validation.fName}
-      </p>
-      <button onClick={() => console.log(inputValues)}>back</button>
-      <button onClick={() => console.log(validation)}>back</button>
+    <div className="registration-view">
+      <ArrowBackIos />
+      <h1> Register </h1>
       <div className="sign-up-form">
         <form
           id="registrationForm"
@@ -101,71 +104,104 @@ function RegistrationView() {
           onSubmit={handleSubmit}
         >
           <div className="form-control">
-            <input
-              placeholder="First Name"
-              type="string"
-              name="fName"
-              id="fName"
-              className="input-field"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.fName}
-            />
-            {validation.fName && <p>{validation.fName}</p>}
-            {validation.fName && console.log(validation)}
-          </div>
-          <div className="form-control">
-            <input
-              placeholder="Last Name"
-              type="string"
-              id="lName"
-              name="lName"
-              className="input-field"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.lName}
-            />
-            {validation.lName && <p>{validation.lName}</p>}
-          </div>
-          <div className="form-control">
-            <input
-              placeholder="email"
-              type="email"
-              name="email"
-              className="input-field"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.email}
-            />
-          </div>
-          {validation.email && <p>{validation.email}</p>}
+            <div className="input-field">
+              <input
+                placeholder="First Name"
+                type="string"
+                name="fName"
+                id="fName"
+                className="input-field"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.fName}
+              />
+              <p>
+                <ErrorOutlined></ErrorOutlined>
+              </p>
+            </div>
 
-          <div className="form-control">
-            <input
-              placeholder="password"
-              type="password"
-              name="password"
-              className="input-field"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.password}
-              required
-            />
-            {validation.password && <p>{validation.password}</p>}
+            {validation.fName && (
+              <p className="register-error_msg">{validation.fName}</p>
+            )}
           </div>
           <div className="form-control">
-            <input
-              placeholder="confirm password"
-              type="password"
-              name="confirmPassword"
-              className="input-field"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.confirmPassword}
-              required
-            />
+            <div className="input-field">
+              <input
+                placeholder="Last Name"
+                type="string"
+                id="lName"
+                name="lName"
+                className="input-field"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.lName}
+              />
+              <p>
+                <ErrorOutlined></ErrorOutlined>
+              </p>
+            </div>
+
+            {validation.lName && (
+              <p className="register-error_msg">{validation.lName}</p>
+            )}
           </div>
-          <button type="submit" id="submit-button">
+          <div className="form-control">
+            <div className="input-field">
+              <input
+                placeholder="email"
+                type="email"
+                name="email"
+                className="input-field"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.email}
+              />
+              <p>
+                <ErrorOutlined></ErrorOutlined>
+              </p>
+            </div>
+          </div>
+          {validation.email && (
+            <p className="register-error_msg">{validation.email}</p>
+          )}
+          <div className="form-control">
+            <div className="input-field">
+              <input
+                placeholder="password"
+                type="password"
+                name="password"
+                className="input-field"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.password}
+                required
+              />
+              <p>
+                <ErrorOutlined></ErrorOutlined>
+              </p>
+            </div>
+            {validation.password && (
+              <p className="register-error_msg">{validation.password}</p>
+            )}
+          </div>
+          <div className="form-control">
+            <div className="input-field">
+              <input
+                placeholder="confirm password"
+                type="password"
+                name="confirmPassword"
+                className="input-field"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.confirmPassword}
+                required
+              />
+              <p>
+                <ErrorOutlined></ErrorOutlined>
+              </p>
+            </div>
+            {validation.confirmPassword && (
+              <p className="register-error_msg">{validation.confirmPassword}</p>
+            )}
+          </div>
+          <Button variant="contained" type="submit" id="submit-button">
             submit
-          </button>
-          <span className="form-input-login">
-            Already have an account? Login <a href="#">here</a>
-          </span>
+          </Button>
         </form>
       </div>
     </div>
