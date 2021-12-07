@@ -10,7 +10,7 @@ import {
   PersonOutlined,
 } from "@mui/icons-material";
 
-function RegistrationView() {
+function RegistrationView(props) {
   const [inputValues, setInputValue] = useState({
     fName: "",
     lName: "",
@@ -102,10 +102,7 @@ function RegistrationView() {
           method="POST"
           onSubmit={handleSubmit}
         >
-          <div
-            className="back-registration"
-            onClick={() => console.log("hola")}
-          >
+          <div className="back-registration" onClick={() => props.toMainView()}>
             <ArrowBackIos className="back-icon" />
             <h1> Register </h1>
           </div>
