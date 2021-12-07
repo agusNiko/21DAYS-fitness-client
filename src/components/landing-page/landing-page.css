@@ -1,0 +1,85 @@
+.landing-page__box {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-page__top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.landing-page__top p {
+  font-weight: 400;
+  color: #2b9736;
+  font-size: 24px;
+  width: 253px;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.circle {
+  background-image: linear-gradient(to top, #b3dbb7, #2b9362);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 121px;
+  width: 121px;
+  border-radius: 50%;
+}
+
+.center-circle {
+  background-color: white;
+  height: 77px;
+  width: 77px;
+  border-radius: 50%;
+}
+
+.landing-page__middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.landing-page__bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.landing-page__bottom button {
+  border: none;
+  margin-top: 15px;
+  width: 330px;
+  border-radius: 30px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #b3dbb7, #2b9362);
+  display: flex;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.landing-page__bottom p {
+  font-size: 14px;
+  color: #91919f;
+  padding-top: 15px;
+}
+
+.down-arrow__icon {
+  color: rgb(0, 0, 0);
+  padding-top: 20px;
+  cursor: pointer;
+}
+
+.google-logo {
+  padding-right: 10px;
+}
