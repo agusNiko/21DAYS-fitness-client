@@ -81,6 +81,14 @@ select:focus {
   font-size: 50px;
 }
 
+.recover-password {
+  width: 80%;
+}
+.recover-password p {
+  font-size: 12px;
+  color: #91919f;
+}
+
 #submit-button {
   position: absolute;
   bottom: 100px;
