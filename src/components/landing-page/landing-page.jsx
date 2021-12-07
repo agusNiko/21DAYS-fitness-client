@@ -1,30 +1,35 @@
-import { Google } from "@mui/icons-material";
-import Button from "@restart/ui/esm/Button";
-import Image from "./img.svg";
-import React from "react";
+import { Google, KeyboardArrowDown } from "@mui/icons-material";
+import "./landing-page.css";
 
-const landingPage = () => {
+import React from "react";
+import Img from "./img";
+
+const LandingPage = (props) => {
   return (
     <div className="landing-page__box">
-      <div>
-        <div></div>
+      <div className="landing-page__top">
+        <div className="circle">
+          <div className="center-circle"></div>
+        </div>
         <div>
-          <h2>Homeworkouts on your terms</h2>
+          <p>Homeworkouts on your terms</p>
         </div>
       </div>
-      <div>
-        <Image></Image>
+      <div className="landing-page__middle">
+        <Img></Img>
       </div>
-      <div>
-        <Button variant="contained" type="submit" id="submit-button">
-          Sign In
-        </Button>
-        <Button variant="contained" type="submit" id="submit-button">
-          <Google /> sign in with google
-        </Button>
+      <div className="landing-page__bottom">
+        <button onClick={() => props.toLogin()}>Sign In</button>
+        <button onClick={() => console.log("connect with google")}>
+          <Google className="google-logo" /> Sign in with google
+        </button>
+        <div onClick={() => props.toRegister()} style={{ cursor: "pointer" }}>
+          <p>Are you new? Register here!</p>
+        </div>
+        <KeyboardArrowDown className="down-arrow__icon"></KeyboardArrowDown>
       </div>
     </div>
   );
 };
 
-export default landingPage;
+export default LandingPage;
