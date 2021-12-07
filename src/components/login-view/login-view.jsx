@@ -1,108 +1,144 @@
 import React, { useState } from "react";
+import "../registration-view/Registration.css";
+import Button from "@mui/material/Button";
 
-import PropTypes from "prop-types";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-
-import { Container } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import {
+  ArrowBackIos,
+  ErrorOutlined,
+  LockOutlined,
+  MailOutlineOutlined,
+} from "@mui/icons-material";
 
 function LoginView(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [inputValues, setInputValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [validation, setValidation] = useState({
+    email: "",
+    password: "",
+  });
+
+  //handle submit updates
+  function handleChange(event) {
+    const { name, value } = event.target; //or:  let value = event.target.value; // let name = event.target.name;
+    setInputValue({ ...inputValues, [name]: value });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hi");
+    let errors = { ...validation };
+
+    // email validation
+    const emailCond = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!inputValues.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!inputValues.email.match(emailCond)) {
+      errors.email = "Please ingress a valid email address";
+    } else {
+      errors.email = "";
+    }
+
+    //password validation
+    const cond1 = /^(?=.*[a-z]).{6,20}$/;
+    const cond2 = /^(?=.*[A-Z]).{6,20}$/;
+    const cond3 = /^(?=.*[0-9]).{6,20}$/;
+    const password = inputValues.password;
+    if (!password) {
+      errors.password = "password is required";
+    } else if (password.length < 6) {
+      errors.password = "Incorrect password";
+    } else if (password.length >= 20) {
+      errors.password = "Incorrect password";
+    } else if (!password.match(cond1)) {
+      errors.password = "Incorrect password";
+    } else if (!password.match(cond2)) {
+      errors.password = "Incorrect password";
+    } else if (!password.match(cond3)) {
+      errors.password = "Incorrect password";
+    } else {
+      errors.password = "";
+    }
+
+    return setValidation(errors);
   };
 
-  console.log("log in view just rendered");
-
   return (
-    <Container className="login-view mt-4">
-      <Row>
-        <Col></Col>
-        <Col sm={8} lg={4}>
-          <Form className="login was-validated" noValidate>
-            <Form.Group controlId="formUsername">
-              <Form.Label
-                className="mb-3"
-                style={{ color: "white", fontWeight: 700, fontSize: "32px" }}
-              >
-                Sign In
-              </Form.Label>
-              <Form.Control
-                required
-                type="text"
-                maxLength={20}
-                minLength={5}
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <Form.Control.Feedback type="valid">
-                awesome!
-              </Form.Control.Feedback>
-              <Form.Control.Feedback type="invalid">
-                Enter your Username!
-              </Form.Control.Feedback>
-            </Form.Group>
+    <div className="registration-view">
+      <div className="sign-up-form">
+        <form
+          id="registrationForm"
+          action="/"
+          method="POST"
+          onSubmit={handleSubmit}
+        >
+          <div className="back-registration" onClick={() => props.toLogin()}>
+            <ArrowBackIos className="back-icon" />
+            <h1> Singing In </h1>
+          </div>
+          <div className="back-registration">
+            <p>Welcome back!</p>
+          </div>
 
-            <Form.Group controlId="formPassword">
-              <Form.Control
-                required
-                type="password"
+          <div className="form-control">
+            <div className="input-field">
+              <p className="input-icon">
+                <MailOutlineOutlined />
+              </p>
+              <input
+                placeholder="Email"
+                type="email"
+                name="email"
+                className="input-field"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.email}
+              />
+              {validation.email && (
+                <p className="register-error_icon">
+                  <ErrorOutlined></ErrorOutlined>
+                </p>
+              )}
+            </div>
+            {validation.email && (
+              <p className="register-error_msg">{validation.email}</p>
+            )}
+          </div>
+
+          <div className="form-control">
+            <div className="input-field">
+              <p className="input-icon">
+                <LockOutlined />
+              </p>
+              <input
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                name="password"
+                className="input-field"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.password}
+                required
               />
-              <Form.Control.Feedback type="valid">
-                awesome!
-              </Form.Control.Feedback>
-              <Form.Control.Feedback type="invalid">
-                Enter your Password!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Form>
-        </Col>
-        <Col></Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col></Col>
-        <Col sm={8} lg={4}>
-          <Button
-            variant="danger"
-            type="submit"
-            onClick={handleSubmit}
-            style={{ width: "100%" }}
-          >
+              {validation.password && (
+                <p className="register-error_icon">
+                  <ErrorOutlined></ErrorOutlined>
+                </p>
+              )}
+            </div>
+            {validation.password && (
+              <p className="register-error_msg">{validation.password}</p>
+            )}
+          </div>
+          <div className="recover-password" onClick={() => console.log("hola")}>
+            <p> Forgot your password? </p>
+          </div>
+          <Button variant="contained" type="submit" id="submit-button">
             Sign In
           </Button>
-        </Col>
-        <Col></Col>
-      </Row>
-      <Row className="mt-4 justify-content-md-center">
-        <p style={{ color: "#737374", padding: "8px" }}>New to 21Days?</p>
-
-        <Button
-          variant="link"
-          type="submit"
-          style={{ color: "white", fontWeight: 600, width: "100%" }}
-        >
-          Sign Up Now!
-        </Button>
-      </Row>
-    </Container>
+        </form>
+      </div>
+    </div>
   );
 }
 
 export default LoginView;
-
-LoginView.propType = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-};
