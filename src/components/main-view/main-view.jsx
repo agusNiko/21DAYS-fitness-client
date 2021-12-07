@@ -26,13 +26,12 @@ class MainView extends React.Component {
   render() {
     return (
       <div className="main-view">
-        <LandingPage />
-        {!this.state.logInView && (
-          <button onClick={() => this.goToLogin()}>sign In</button>
-        )}
-        {!this.state.registerView && (
-          <button onClick={() => this.goToRegister()}>register</button>
-        )}
+        {!this.state.registerView && !this.state.logInView ? (
+          <LandingPage
+            toLogin={this.goToLogin}
+            toRegister={this.goToRegister}
+          />
+        ) : null}
         {this.state.registerView && (
           <RegistrationView toMainView={this.goToRegister} />
         )}
