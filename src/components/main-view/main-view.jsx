@@ -1,9 +1,8 @@
 import React from "react";
 import "./Main-view.css";
-
-import Header from "../header/Header";
-import RegistrationView from "../registration-view/Registration-view";
-import LoginView from "../login-view/Login-view";
+import RegistrationView from "../registration-view/registration-view";
+import LoginView from "../login-view/login-view";
+import LandingPage from "../landing-page/landing-page";
 
 class MainView extends React.Component {
   constructor() {
@@ -27,6 +26,7 @@ class MainView extends React.Component {
   render() {
     return (
       <div className="main-view">
+        <LandingPage />
         {!this.state.logInView && (
           <button onClick={() => this.goToLogin()}>sign In</button>
         )}
