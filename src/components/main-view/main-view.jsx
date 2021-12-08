@@ -3,6 +3,7 @@ import "./Main-view.css";
 import RegistrationView from "../registration-view/registration-view";
 import LoginView from "../login-view/login-view";
 import LandingPage from "../landing-page/landing-page";
+import Header from "../header/Header";
 
 class MainView extends React.Component {
   constructor() {
@@ -27,6 +28,7 @@ class MainView extends React.Component {
   render() {
     return (
       <div className="main-view">
+        <Header />
         {!this.state.registerView &&
         !this.state.logInView &&
         !this.state.user ? (
