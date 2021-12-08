@@ -1,6 +1,4 @@
 .main-view {
-  height: 100vh;
-  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
