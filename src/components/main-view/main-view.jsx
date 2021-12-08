@@ -10,6 +10,7 @@ class MainView extends React.Component {
     this.state = {
       registerView: false,
       logInView: false,
+      user: "",
     };
   }
 
@@ -26,7 +27,9 @@ class MainView extends React.Component {
   render() {
     return (
       <div className="main-view">
-        {!this.state.registerView && !this.state.logInView ? (
+        {!this.state.registerView &&
+        !this.state.logInView &&
+        !this.state.user ? (
           <LandingPage
             toLogin={this.goToLogin}
             toRegister={this.goToRegister}
