@@ -1,6 +1,5 @@
 .registration-view {
   width: 400px;
-  border: 1px solid black;
   height: 100%;
 }
 
@@ -95,4 +94,28 @@ select:focus {
   width: 300px;
   border-radius: 25px;
   background-image: linear-gradient(to right, #b3dbb7, #2b9362);
+}
+
+.created-by {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.created-by h1 {
+  color: #ffff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.Created-by__faces {
+  display: flex;
+  width: 100%;
+  margin-top: 40px;
+  justify-content: space-around;
+}
+
+.Created-by__faces p {
+  color: #13771e;
+  font-weight: 700;
 }
