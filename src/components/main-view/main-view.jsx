@@ -3,7 +3,7 @@ import "./Main-view.css";
 import RegistrationView from "../registration-view/registration-view";
 import LoginView from "../login-view/login-view";
 import LandingPage from "../landing-page/landing-page";
-import Header from "../header/Header";
+import Header from "../header/header";
 
 class MainView extends React.Component {
   constructor() {
